@@ -1,0 +1,13 @@
+Emandako kodearen irteera "2" da:
+
+    Hasieran, guraso prozesu bakarra dago.
+
+    Gurasoak fork() deia egiten du, hau da, seme bat sortzen du.
+
+    Semearen kasuan, if baldintza erabiliz sartzen da: fork() && (!fork()). Horrela, semea fork() deia egiten du eta horren ondoren !fork() baldintza erabiliz sartzen da. Hau da, semea sortzen da eta gero bakrrik exekutatuko da seme hau.
+
+    Azkenengo if (fork() || fork()) baldintza sartzen da, beraz semeak "if" baldintza barnean sartzen da, eta berriro fork() deia egiten du. Hau da, bi seme sortzen ditu.
+
+    Azkenik, aztertutako lehenengo semeak "printf("2 ")" deia egiten du eta "2 " inprimatzen du.
+
+Beraz, irteera "2" da, programa "2 " inprimatzen du bakarrik.
