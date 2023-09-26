@@ -1,0 +1,13 @@
+Emandako kodearen irteera "1 1 1 1 1 1 1 1" izango da:
+
+    Hasieran, guraso prozesu bakarra dago.
+
+    Lehenengo fork() prozesu seme bat sortzen du. Gurasoa eta semea jarraitzen dute hurrengo lerroan paraleloki exekutatzen.
+
+    Lehenengo fork() baldintza barnean, fork()a exekutatzen da guraso eta semeen prozesu bietan. Hau bi prozesu gehiago sortzen ditu, guztira lau prozesu aktibo egonda.
+        Lehenengo seme prozesuan, seme berri bat sortzen da, baina ez dira gehiago sortzen.
+        Bigarren seme prozesuan, beste seme bat sortzen da (hasierako prozesuaren aitona), baina ez dira gehiago sortzen.
+        Hirugarren seme prozesuan, beste seme bat sortzen da (hasierako prozesuaren aitona), baina ez dira gehiago sortzen.
+        Laugarren seme prozesuan, ez dira seme gehiagorik sortzen.
+
+Beraz, "1 1 1 1 1 1 1 1" irteera osoa dugu, hau da, guztira 8 "1" inprimatzen dira.

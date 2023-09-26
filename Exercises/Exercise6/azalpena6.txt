@@ -1,0 +1,17 @@
+Hemen emandako kodearen irteera "3 4 1 2 4 4 1 2 4 4" da:
+
+    Hasieran, guraso prozesu bakarra dago.
+
+    Gurasoak fork() deia egiten du, hau da, seme bat sortzen du.
+
+    Gurasoaren kasuan, if baldintzan sartzen da, beraz fork() deia egin eta seme bat sortzen du.
+
+    if (!fork()) baldintzan sartzen dra, beraz lehenengo semeak fork() deia egiten du, hau da, bi seme sortzen ditu.
+        Lehenengo semeak fork() deia egiten du, beraz hirugarren seme bat sortzen du. Gero, "1 " inprimatzen du.
+        Bestalde, bigarren semeak "2 " inprimatzen du.
+
+    Gurasoak "3 " inprimatzen du, beraz hasierako gurasoak "3 " inprimatzen du.
+
+    Azkenik, guztiak "4 " inprimatzen dute.
+
+Beraz, "3 4 1 2 4 4 1 2 4 4" irteera dugu, hau da, "3 " inprimatutakoan hasierako gurasoa, "1 " eta "2 " lehenengo semea eta bigarren semeak, eta "4 " denek.
