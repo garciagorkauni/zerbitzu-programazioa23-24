@@ -17,8 +17,8 @@ class Diner extends Thread {
                 tables.acquire();
                 eatMeal();
                 Thread.sleep(1500);
-                walk();
                 tables.release();
+                walk();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
