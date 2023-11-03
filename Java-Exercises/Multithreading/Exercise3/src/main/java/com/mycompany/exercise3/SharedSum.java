@@ -1,3 +1,5 @@
+package com.mycompany.exercise3;
+
 class SharedSum {
     private long totalSum = 0;
 

@@ -1,3 +1,4 @@
+package com.mycompany.exercise5;
 import java.util.concurrent.Semaphore;
 
 class Diner extends Thread {
@@ -16,7 +17,7 @@ class Diner extends Thread {
             while (true) {
                 tables.acquire();
                 eatMeal();
-                Thread.sleep(1500);
+                Thread.sleep((long) (1000 + Math.random() * 3000));
                 tables.release();
                 walk();
             }

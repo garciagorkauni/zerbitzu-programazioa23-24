@@ -1,5 +1,4 @@
-import FactorialCalculator;
-import SharedSum;
+package com.mycompany.exercise2;
 
 class Main {
   // Define the variables

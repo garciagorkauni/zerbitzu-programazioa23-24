@@ -1,3 +1,5 @@
+package com.mycompany.exercise2;
+
 class FactorialCalculator extends Thread {
   // Define variables
   private long start, end;

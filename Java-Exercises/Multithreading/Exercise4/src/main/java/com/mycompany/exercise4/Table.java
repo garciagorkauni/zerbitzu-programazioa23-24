@@ -1,3 +1,5 @@
+package com.mycompany.exercise4;
+
 class Table {
     // Define the variables
     private int availableTables;

@@ -1,3 +1,5 @@
+package com.mycompany.exercise4;
+
 class Diner extends Thread {
     // Define the variables
     private Table table;
@@ -14,7 +16,7 @@ class Diner extends Thread {
             while (true) {
                 table.acquireTable();
                 eatMeal();
-                Thread.sleep(1500);
+                Thread.sleep((long) (1000 + Math.random() * 3000));
                 walk();
                 table.releaseTable();
             }

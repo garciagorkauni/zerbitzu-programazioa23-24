@@ -1,3 +1,5 @@
+package com.mycompany.exercise4;
+
 class Main {
     public static void main(String[] args) {
         

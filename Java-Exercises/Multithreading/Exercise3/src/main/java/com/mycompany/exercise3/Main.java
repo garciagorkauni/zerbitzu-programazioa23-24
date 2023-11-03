@@ -1,5 +1,4 @@
-import FactorialCalculator;
-import SharedSum;
+package com.mycompany.exercise3;
 import java.util.concurrent.Semaphore;
 
 class Main {
@@ -20,7 +19,7 @@ class Main {
     for (int i = 0; i < THREADS_QUANTITY; i++) {
       long start = i * (N / THREADS_QUANTITY) + 1;
       long end = (i + 1) * (N / THREADS_QUANTITY);      
-      threads[i] = new FactorialCalculator(start, end, totalSum);
+      threads[i] = new FactorialCalculator(start, end, totalSum, sem);
       threads[i].start();
     }
 

@@ -1,5 +1,5 @@
+package com.mycompany.exercise5;
 import java.util.concurrent.Semaphore;
-import Diner;
 
 class Main {  
   public static void main(String[] args) {
