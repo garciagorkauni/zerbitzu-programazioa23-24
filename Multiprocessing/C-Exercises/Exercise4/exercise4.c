@@ -34,7 +34,7 @@ int main() {
         close(pipe_fd[1]);
 
         // Execute a command in the child process (e.g., "ls")
-        execlp("ls", "ls", NULL);
+        execlp("ls", "-l", NULL);
 
         // If execlp fails, we print an error message
         perror("execlp failed");
