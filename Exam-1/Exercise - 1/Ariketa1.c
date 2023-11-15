@@ -4,12 +4,13 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h> 
+#include <signal.h>
+#include <sys/wait.h>
 
-int signalHandler(){
+void signalHandler(){
     // Show the message
     printf("Signal received.");
-
-    return 0;
+    exit(EXIT_SUCCESS);
 }
 
 int main(){
@@ -33,18 +34,19 @@ int main(){
     pipe(pipefdTwoToParent);
 
     // Define signal handler
-    signal(2, signalHandler());
-    signal(15, signalHandler());
+    signal(SIGINT, signalHandler);
+    signal(SIGTERM, signalHandler);
 
     // Create the first child
     pidOne = fork();
 
     if(pidOne == -1){
         // Error output with the fork
-        printf("Error creating the first child...");
+        printf("Error creating the first child...\n");
     } else if(pidOne == 0){
         // Child one
         // Calculate the numbers divisible by 7 in [1, 5000] and pass them to child two
+        printf("First child created\n");
         close(pipefdOneToTwo[0]); // Close read end
 
         for (int i = 1; i <= 5000; i++){
@@ -53,6 +55,7 @@ int main(){
                 write(pipefdOneToTwo[1], &i, sizeof(int));
             }
         }
+        printf("Numbers divisible by 7 wrote");
 
         close(pipefdOneToTwo[1]); // Close write end
         
@@ -63,11 +66,12 @@ int main(){
 
         if(pidTwo == -1){
             // Error output with the fork
-            printf("Error creating the second child...");
+            printf("Error creating the second child...\n");
         } else if(pidTwo == 0){
             // Child two
             // Read the numbers divisible by 7, calculate the sum of all of them and pass it to parent
 
+            printf("Second child created\n");
             // Define some variables
             ssize_t bytesRead;
             int receivedNum;
@@ -76,14 +80,14 @@ int main(){
 
             // Read the data from the pipe
             while ((bytesRead = read(pipefdOneToTwo[0], &receivedNum, sizeof(int))) > 0){
-                totalSum += receivedNum; // Increment the total sum
+                totalSum = totalSum + receivedNum; // Increment the total sum
             }
-
+            printf("%d\n", totalSum);
             // Finished reading
             if(bytesRead == -1){
-                printf("Error reading the data");
+                printf("Error reading the data\n");
             } else if(bytesRead == 0){
-                printf("Child two reaches end of file (EOF)");
+                printf("Child two reaches end of file (EOF)\n");
             }
 
             close(pipefdOneToTwo[0]); // Close read end
@@ -99,7 +103,6 @@ int main(){
         } else {
             // Parent
             // Wait for the childrens, read the total sum, and show it
-
             waitpid(pidOne, &statusOne, 0);
             waitpid(pidTwo, &statusTwo, 0);
 
@@ -111,8 +114,7 @@ int main(){
             close(pipefdTwoToParent[0]); // Close read end
 
             // Show the results
-            printf("Final sum: %d", finalSum);
-
+            printf("Final sum: %d\n", finalSum);
         }
     }
     return 0;
