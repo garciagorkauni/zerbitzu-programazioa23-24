@@ -47,6 +47,9 @@ int main(){
         // Child one
         // Calculate the numbers divisible by 7 in [1, 5000] and pass them to child two
         printf("First child created\n");
+        // Close the unnecessary pipe
+        close(pipefdTwoToParent[0]);
+        close(pipefdTwoToParent[1]);
         close(pipefdOneToTwo[0]); // Close read end
 
         for (int i = 1; i <= 5000; i++){
@@ -55,7 +58,7 @@ int main(){
                 write(pipefdOneToTwo[1], &i, sizeof(int));
             }
         }
-        printf("Numbers divisible by 7 wrote");
+        printf("Numbers divisible by 7 wrote (from FIRST child)\n");
 
         close(pipefdOneToTwo[1]); // Close write end
         
@@ -82,12 +85,11 @@ int main(){
             while ((bytesRead = read(pipefdOneToTwo[0], &receivedNum, sizeof(int))) > 0){
                 totalSum = totalSum + receivedNum; // Increment the total sum
             }
-            printf("%d\n", totalSum);
             // Finished reading
             if(bytesRead == -1){
-                printf("Error reading the data\n");
+                printf("Error reading the data (from SECOND child)...\n");
             } else if(bytesRead == 0){
-                printf("Child two reaches end of file (EOF)\n");
+                printf("Child two reaches end of file (EOF) - (from SECOND child)\n");
             }
 
             close(pipefdOneToTwo[0]); // Close read end
@@ -96,12 +98,17 @@ int main(){
             close(pipefdTwoToParent[0]); // Close read end
 
             write(pipefdTwoToParent[1], &totalSum, sizeof(int)); // Write into the pipe
+            printf("Total sum calculated and wrote (from SECOND child)\n");
 
             close(pipefdTwoToParent[1]); // Close write end
             
 
         } else {
             // Parent
+            // Close the unnecessary pipe
+            close(pipefdOneToTwo[0]);
+            close(pipefdOneToTwo[1]);
+
             // Wait for the childrens, read the total sum, and show it
             waitpid(pidOne, &statusOne, 0);
             waitpid(pidTwo, &statusTwo, 0);
@@ -114,7 +121,7 @@ int main(){
             close(pipefdTwoToParent[0]); // Close read end
 
             // Show the results
-            printf("Final sum: %d\n", finalSum);
+            printf("Final sum (from PARENT): %d\n", finalSum);
         }
     }
     return 0;
