@@ -7,7 +7,7 @@ public class Server {
     public static void main(String[] args) {
         final int port = 12345;
         ArrayList<Integer> numbers = new ArrayList<Integer>();
-
+        
         try {
             DatagramSocket socket = new DatagramSocket(port);
             System.out.println("Server is listening on port " + port);
