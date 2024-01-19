@@ -16,6 +16,8 @@ public class Client {
         int port = 12345;
         String ip = "127.0.0.1";
 
+        int galderaKopurua = 3;
+
         try (Socket socket = new Socket(ip, port)) { //Konexioa sortu
             
             //TCPrako idazketa- eta irakurketa-kanalak sortu
@@ -26,10 +28,10 @@ public class Client {
             PrintWriter writer = new PrintWriter(outputStream, true);
 
             //Ariketaren kodigoa
-            while (true) {
+            for(int i = galderaKopurua; i >= 1; i--) {
                 //Zerbitzariak bidaltzen duen mezua prozesatu
                 String mezua = reader.readLine();
-                String[] lerroak = mezua.split("**");
+                String[] lerroak = mezua.split("xx");
                 for (String lerroa : lerroak) {
                     System.out.println(lerroa);
                 }
@@ -39,6 +41,12 @@ public class Client {
                 System.out.print("Zure erantzuna (a/b/c): ");
                 String aukera = sc.next().toLowerCase();
                 writer.println(aukera);
+            }
+            
+            String mezua = reader.readLine();
+            String[] lerroak = mezua.split("xx");
+            for (String lerroa : lerroak) {
+                System.out.println(lerroa);
             }
         } catch (Exception e) {
         }

@@ -19,7 +19,7 @@ public class Server {
         int counter = 0;
 
         //Zerbitzaria bezeroen zain jarri eta bezeroen konexioak onartu. Konexio bakoitzeko, hari bat sortu
-        while(counter <= konexioKopurua) {
+        while(counter < konexioKopurua) {
             Socket client = server.accept();
             ServerService thread = new ServerService(client);
             thread.start();

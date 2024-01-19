@@ -29,18 +29,18 @@ public class ServerService extends Thread{
 
         //Galderekin arraylist bat sortu
         ArrayList<String> galderak = new ArrayList<>();
-        galderak.add("1. galdera: hauetako zein da konexiora bideratutako garraio-protokoloa?**" + //
-                "a) TCP**" + //
-                "b) UDP**" + //
-                "c) IP");
-        galderak.add("2. galdera: Zer-nolako aplikazioek jasotzen dute onura gehien UDP protokolotik?**" + //
-                "a) Artxiboen transferentzia**" + //
-                "b) Bideokonferentzia eta ahots-transmisioa**" + //
-                "c) Web nabigazioa");
-        galderak.add("3. galdera: Zein da \"Acknowledgment\" (ACK) eremuaren funtzioa TCPren goiburuan?**" + //
-                "a) Datuak entregatu direla berrestea**" + //
-                "b) Hasierako konexioa ezartzea**" + //
-                "c) Bideratzea kudeatzea");
+        galderak.add("xx1. galdera: hauetako zein da konexiora bideratutako garraio-protokoloa?xx" + //
+                "a) TCPxx" + //
+                "b) UDPxx" + //
+                "c) IPxx");
+        galderak.add("xx2. galdera: Zer-nolako aplikazioek jasotzen dute onura gehien UDP protokolotik?xx" + //
+                "a) Artxiboen transferentziaxx" + //
+                "b) Bideokonferentzia eta ahots-transmisioaxx" + //
+                "c) Web nabigazioaxx");
+        galderak.add("xx3. galdera: Zein da \"Acknowledgment\" (ACK) eremuaren funtzioa TCPren goiburuan?xx" + //
+                "a) Datuak entregatu direla berresteaxx" + //
+                "b) Hasierako konexioa ezartzeaxx" + //
+                "c) Bideratzea kudeatzeaxx");
             
         try {
             //TCPrako idazketa- eta irakurketa-kanalak sortu
@@ -60,13 +60,20 @@ public class ServerService extends Thread{
                 erabiltzailearenErantzunak.add(erantzuna);
             }
 
+            String emaitzaTestua;
             int erantzunZuzenKopurua = 0;
             for (int i = 0; i < 3; i++) {
                 if (erantzunZuzenak.get(i).equals(erabiltzailearenErantzunak.get(i))){
                     erantzunZuzenKopurua++;
                 }
             }
-            writer.println("Asmatutako erantzunen kopurua: " + erantzunZuzenKopurua);
+            emaitzaTestua = "Asmatutako erantzunen kopurua: " + erantzunZuzenKopurua + "xx";
+            if(erantzunZuzenKopurua > erantzunZuzenak.size()/2){
+                emaitzaTestua += "GAINDITUTA!";
+            } else {
+                emaitzaTestua += "EZ GAINDITUTA!";
+            }
+            writer.println(emaitzaTestua);
 
         } catch (Exception e) {
         }
